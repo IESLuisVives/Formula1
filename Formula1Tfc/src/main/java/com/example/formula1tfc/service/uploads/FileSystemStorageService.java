@@ -1,8 +1,7 @@
 package com.example.formula1tfc.service.uploads;
-
-import es.joseluisgs.springdam.controllers.files.FilesRestController;
-import es.joseluisgs.springdam.errors.storage.StorageException;
-import es.joseluisgs.springdam.errors.storage.StorageFileNotFoundException;
+import com.example.formula1tfc.controller.files.FilesRestController;
+import com.example.formula1tfc.error.storage.StorageException;
+import com.example.formula1tfc.error.storage.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;

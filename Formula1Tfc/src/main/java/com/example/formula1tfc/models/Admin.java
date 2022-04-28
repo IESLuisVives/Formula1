@@ -2,7 +2,7 @@ package com.example.formula1tfc.models;
 
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
