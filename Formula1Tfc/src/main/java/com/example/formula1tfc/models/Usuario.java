@@ -19,17 +19,17 @@ public abstract class Usuario {
     @JsonView({Views.Admin.class, Views.Cliente.class})
     private String nombre;
     @JsonView({Views.Admin.class, Views.Cliente.class})
-    private String correo;
+    private String email;
     @JsonView({Views.Admin.class, Views.Cliente.class})
     private String password;
     @JsonView({Views.Admin.class, Views.Cliente.class})
     private String foto;
-    @JsonView({Views.Admin.class, Views.Cliente.class})
-    private Login login;
+    /*@JsonView({Views.Admin.class, Views.Cliente.class})
+    private Login login;*/
 
-    public Usuario(String nombre, String correo, String password, String foto) {
+    public Usuario(String nombre, String email, String password, String foto) {
         this.nombre = nombre;
-        this.correo = correo;
+        this.email = email;
         this.password = password;
         this.foto = foto;
         id = UUID.randomUUID();
@@ -39,7 +39,7 @@ public abstract class Usuario {
     public Usuario(UUID id, String nombre, String correo, String password, String foto) {
         this.id = id;
         this.nombre = nombre;
-        this.correo = correo;
+        this.email = correo;
         this.password = password;
         this.foto = foto;
     }
@@ -64,11 +64,11 @@ public abstract class Usuario {
 
     @Basic
     public String getCorreo() {
-        return correo;
+        return email;
     }
 
     public void setCorreo(String corre) {
-        this.correo = corre;
+        this.email = corre;
     }
 
     @Basic
@@ -89,13 +89,13 @@ public abstract class Usuario {
         this.foto = foto;
     }
 
-    @Embedded
+    /*@Embedded
     public Login getLogin() {
         return login;
     }
 
     public void setLogin(Login login) {
         this.login = login;
-    }
+    }*/
 }
 

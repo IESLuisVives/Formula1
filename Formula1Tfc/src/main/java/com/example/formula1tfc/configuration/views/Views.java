@@ -5,4 +5,5 @@ public class Views {
     public interface Admin{};
     public interface Circuito{};
     public interface Pilotos{};
+    public interface Clasificacion{};
 }

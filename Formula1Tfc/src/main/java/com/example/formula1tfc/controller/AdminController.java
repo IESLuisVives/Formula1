@@ -27,12 +27,12 @@ public class AdminController {
     private final AdminRepository repository;
     private final AdminMapper mapper;
 
-    @ApiOperation(value = "Login Admin", notes = "Devolverá si el login es válido o no.")
+    /*@ApiOperation(value = "Login Admin", notes = "Devolverá si el login es válido o no.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralError.class)
-    })
-    @GetMapping("/login")
+    })*/
+    /*@GetMapping("/login")
     public ResponseEntity login(@RequestParam(name = "mail") String mail,
                                 @RequestParam(name = "password") String password) {
         Optional<Admin> admin = repository.findAdminByCorreo(mail);
@@ -44,7 +44,7 @@ public class AdminController {
             }
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new GeneralError());
         }
-    }
+    }*/
 
     @ApiOperation(value = "Get All Admin", notes = "Devuelve una lista de administradores.")
     @ApiResponse(code = 200, message = "OK", response = AdminDTO.class)

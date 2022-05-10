@@ -29,12 +29,12 @@ public class ClienteController {
     private final ClienteRepository clienteRepository;
     private final ClienteMapper mapper;
 
-    @ApiOperation(value = "Login cliente", notes = "Login del cliente android.")
+    /*@ApiOperation(value = "Login cliente", notes = "Login del cliente android.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralError.class)
-    })
-    @GetMapping("/login")
+    })*/
+   /* @GetMapping("/login")
     public ResponseEntity login(@RequestParam(required = false, name = "token") Optional<String> token,
                                 @RequestParam(name = "mail") String mail,
                                 @RequestParam(name = "password") String password) {
@@ -43,7 +43,7 @@ public class ClienteController {
         } else {
             return findUser(mail, password, Optional.empty());
         }
-    }
+    }*/
 
     /**
      * Método que comprueba el login
@@ -53,7 +53,7 @@ public class ClienteController {
      * @param token    Optional<String> token
      * @return ResponseEntity respuesta
      */
-    private ResponseEntity findUser(String mail, String password, Optional<String> token) {
+    /*private ResponseEntity findUser(String mail, String password, Optional<String> token) {
         Optional<Cliente> cliente = clienteRepository.findByCorreo(mail);
         if (cliente.isPresent() &&
                 cliente.get().getPassword().equals(password) &&
@@ -83,7 +83,7 @@ public class ClienteController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new GeneralError());
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new GeneralError());
-    }
+    }*/
 
     @ApiOperation(value = "Get All Cliente", notes = "Devuelve una lista de clientes.")
     @ApiResponse(code = 200, message = "OK", response = ClienteDTO.class)

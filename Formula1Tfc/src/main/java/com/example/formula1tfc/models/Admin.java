@@ -9,12 +9,12 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Admin extends Usuario {
 
-    public Admin(String nombre, String correo, String password, String foto) {
-        super(nombre, correo, password, foto);
+    public Admin(String nombre, String email, String password, String foto) {
+        super(nombre, email, password, foto);
     }
 
     //TEST
-    public Admin(UUID id, String nombre, String correo, String password, String foto) {
-        super(id, nombre, correo, password, foto);
+    public Admin(UUID id, String nombre, String email, String password, String foto) {
+        super(id, nombre, email, password, foto);
     }
 }

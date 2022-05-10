@@ -2,9 +2,7 @@ package com.example.formula1tfc.models;
 
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
@@ -14,6 +12,9 @@ public class Pilotos {
     private String edad;
     private String imagen;
     private String escuderia;
+    @ManyToOne
+    @JoinColumn(name="clasificacion_id")
+    private Clasificacion clasificacion;
 
     @Id
     public int getId() {
@@ -54,5 +55,22 @@ public class Pilotos {
 
     public void setEscuderia(String escuderia) {
         this.escuderia = escuderia;
+    }
+
+    public Clasificacion getClasificacion() {
+        return clasificacion;
+    }
+
+    public void setClasificacion(Clasificacion clasificacion) {
+        this.clasificacion = clasificacion;
+    }
+
+    public Pilotos(int id, String nombre, String edad, String imagen, String escuderia, Clasificacion clasificacion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.edad = edad;
+        this.imagen = imagen;
+        this.escuderia = escuderia;
+        this.clasificacion = clasificacion;
     }
 }
