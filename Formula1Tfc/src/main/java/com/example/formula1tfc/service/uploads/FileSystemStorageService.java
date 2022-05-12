@@ -41,16 +41,6 @@ public class FileSystemStorageService implements StorageService {
     public FileSystemStorageService(@Value("${upload.root-location}") String path) {
         this.rootLocation = Paths.get(path);
     }
-
-    /**
-     * Método que almacena un fichero en el almacenamiento secundario
-     * desde un objeto de tipo  MultipartFile
-     * <p>
-     * Modificamos el original del ejemplo de Spring para cambiar el nombre
-     * del fichero a almacenar. Como lo asociamos al objeto a subir usaremos el ID de
-     * dicho objeto como nombre de fichero.
-     * Usamos una hueya de tiempo para evitar colisiones.
-     */
     @Override
     public String store(MultipartFile file) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());

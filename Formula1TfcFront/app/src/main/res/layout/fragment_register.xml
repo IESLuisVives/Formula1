@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
+                                                   android:background="@color/black"
                                                    android:layout_height="match_parent"
                                                    tools:context=".loginRegister.Register">
     <ImageView
@@ -16,7 +17,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:textSize="35dp"
             app:layout_constraintStart_toEndOf="@+id/iv_register" app:layout_constraintTop_toTopOf="@+id/iv_register"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_register" android:layout_marginEnd="25dp"/>
+            app:layout_constraintBottom_toBottomOf="@+id/iv_register" android:layout_marginEnd="25dp"
+            android:textColor="#FFFFFF"/>
     <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -30,6 +32,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
+                    android:background="@color/white"
+                    android:textColorHint="@color/red"
                     android:ems="10"
                     android:id="@+id/et_username_register" android:hint="Username"
                     android:layout_marginTop="25dp"
@@ -38,6 +42,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
+                    android:background="@color/white"
+                    android:textColorHint="@color/red"
                     android:ems="10"
                     android:id="@+id/et_email_register"
                     android:layout_marginTop="25dp"
@@ -46,6 +52,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
+                    android:background="@color/white"
+                    android:textColorHint="@color/red"
                     android:ems="10"
                     android:id="@+id/et_password_register"
                     android:layout_marginTop="25dp"
@@ -53,6 +61,8 @@
             <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:textColorHint="@color/red"
                     android:inputType="textPassword"
                     android:ems="10"
                     android:id="@+id/et_repeat_password_register" android:hint="Repeat password"
@@ -63,12 +73,16 @@
     <Button
             android:text="Log in"
             android:layout_width="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/red"
             android:layout_height="wrap_content" android:id="@+id/button_go_to_login"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="35dp" android:layout_marginBottom="35dp"/>
     <Button
             android:text="Register"
             android:layout_width="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/red"
             android:layout_height="wrap_content" android:id="@+id/button_ok_register"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="@+id/button_go_to_login"
             android:layout_marginEnd="35dp"/>

@@ -15,6 +15,7 @@ import com.example.formula1tfcfront.R;
 import com.example.formula1tfcfront.aplication.ui.Intercambio;
 import com.example.formula1tfcfront.databinding.FragmentUserBinding;
 
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link UserFragment#newInstance} factory method to
@@ -55,11 +56,9 @@ public class UserFragment extends Fragment {
 
         binding = FragmentUserBinding.inflate(inflater,container,false);
 
-        mediaPlayer.start();
-
         binding.buttonDarseDeBajaUprofile.setBackgroundColor(Color.RED);
-        binding.tvEmailUprofile.setText(Intercambio.getInstance().getUsuario().getCorreo());
-        binding.tvUsernameUprofile.setText(Intercambio.getInstance().getUsuario().getNombre());
+        //binding.tvEmailUprofile.setText(Intercambio.getInstance().getUsuario().getCorreo());
+        //binding.tvUsernameUprofile.setText(Intercambio.getInstance().getUsuario().getNombre());
 
         setOnClick();
 
