@@ -9,5 +9,15 @@
       "name": "upload.root-location",
       "type": "java.lang.String",
       "description": "Description for upload.root-location."
+    },
+    {
+      "name": "url",
+      "type": "java.lang.String",
+      "description": "Description for url."
+    },
+    {
+      "name": "website.url",
+      "type": "java.lang.String",
+      "description": "Description for website.url."
     }
   ] }
