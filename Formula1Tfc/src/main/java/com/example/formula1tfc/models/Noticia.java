@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class Noticia {
     private String titulo;
+    private String imagen;
     private String url;
 }

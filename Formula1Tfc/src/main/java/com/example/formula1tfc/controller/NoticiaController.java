@@ -22,6 +22,6 @@ public class NoticiaController {
 
     @GetMapping("/all")
     public ResponseEntity<Set<Noticia>> getAllNoticias(){
-        return ResponseEntity.status(HttpStatus.OK).body(noticiaService.extraerNoticiasPagina());
+        return ResponseEntity.status(HttpStatus.OK).body(noticiaService.extraerNoticiasPagina2());
     }
 }

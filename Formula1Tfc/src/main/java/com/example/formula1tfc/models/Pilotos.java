@@ -12,9 +12,6 @@ public class Pilotos {
     private String edad;
     private String imagen;
     private String escuderia;
-    @ManyToOne
-    @JoinColumn(name="clasificacion_id")
-    private Clasificacion clasificacion;
 
     @Id
     public int getId() {
@@ -57,20 +54,12 @@ public class Pilotos {
         this.escuderia = escuderia;
     }
 
-    public Clasificacion getClasificacion() {
-        return clasificacion;
-    }
 
-    public void setClasificacion(Clasificacion clasificacion) {
-        this.clasificacion = clasificacion;
-    }
-
-    public Pilotos(int id, String nombre, String edad, String imagen, String escuderia, Clasificacion clasificacion) {
+    public Pilotos(int id, String nombre, String edad, String imagen, String escuderia) {
         this.id = id;
         this.nombre = nombre;
         this.edad = edad;
         this.imagen = imagen;
         this.escuderia = escuderia;
-        this.clasificacion = clasificacion;
     }
 }
