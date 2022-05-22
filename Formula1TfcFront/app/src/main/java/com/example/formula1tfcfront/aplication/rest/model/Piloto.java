@@ -1,6 +1,6 @@
 package com.example.formula1tfcfront.aplication.rest.model;
 
-public class Pilotos {
+public class Piloto {
     private int id;
     private String nombre;
     private String edad;
@@ -45,5 +45,14 @@ public class Pilotos {
 
     public void setEscuderia(String escuderia) {
         this.escuderia = escuderia;
+    }
+
+    @Override
+    public String toString() {
+        return nombre + '\'' +
+                ", edad='" + edad + '\'' +
+                ", imagen='" + imagen + '\'' +
+                ", escuderia='" + escuderia + '\'' +
+                '}';
     }
 }

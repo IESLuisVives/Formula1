@@ -1,11 +1,21 @@
 package com.example.formula1tfcfront.aplication.ui.circuitos;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.formula1tfcfront.R;
+import com.example.formula1tfcfront.aplication.rest.Api;
+import com.example.formula1tfcfront.aplication.rest.ApiConfig;
+import com.example.formula1tfcfront.aplication.rest.model.Circuito;
+import com.example.formula1tfcfront.databinding.FragmentCircuitosBinding;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,50 +24,50 @@ import com.example.formula1tfcfront.R;
  */
 public class Circuitos extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private FragmentCircuitosBinding binding;
+    private ArrayAdapter<Circuito> listaCircuitos;
+    private Api api;
+    private List<Circuito> circuitosList;
 
     public Circuitos() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Circuitos.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Circuitos newInstance(String param1, String param2) {
-        Circuitos fragment = new Circuitos();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+    public static Circuito newInstance(String param1, String param2) {
+        Circuito fragment = new Circuito();
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        api = ApiConfig.getClient().create(Api.class);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_circuitos, container, false);
+        binding = FragmentCircuitosBinding.inflate(inflater,container,false);
+        obtenerPilotos();
+        return binding.getRoot();
+    }
+
+    private void obtenerPilotos(){
+        Call<List<Circuito>> allCircuitos = api.obtenerCircuitos();
+
+        allCircuitos.enqueue(new Callback<List<Circuito>>() {
+            @Override
+            public void onResponse(Call<List<Circuito>> call, Response<List<Circuito>> response) {
+                circuitosList = response.body();
+                listaCircuitos = new ArrayAdapter<Circuito>(getActivity(), android.R.layout.simple_list_item_1, circuitosList);
+                binding.listaCircuitos.setAdapter(listaCircuitos);
+            }
+
+            @Override
+            public void onFailure(Call<List<Circuito>> call, Throwable t) {
+                Toast.makeText(getActivity(), "Fallo al comunicar con la base de datos", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

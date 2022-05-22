@@ -46,4 +46,13 @@ public class Circuito {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
+
+    @Override
+    public String toString() {
+        return pais + '\'' +
+                ", vueltaRapida='" + vueltaRapida + '\'' +
+                ", longitud='" + longitud + '\'' +
+                ", imagen='" + imagen + '\'' +
+                '}';
+    }
 }

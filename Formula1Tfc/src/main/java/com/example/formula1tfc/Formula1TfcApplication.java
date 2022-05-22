@@ -25,7 +25,7 @@ public class Formula1TfcApplication {
             adminRepository.insert(new Admin("Saul", "saul@gmail.com", "admin", "url"));
 
             //Pilotos
-            pilotosRepository.insert(new Pilotos(1,"Fernando Alonso", "40", "imagen", TipoEscuderia.ALPINE.name()));
+            pilotosRepository.insert(new Pilotos(1,"Fernando Alonso", "40", "https://www.formula1.com/content/fom-website/en/drivers/fernando-alonso/_jcr_content/image.img.1920.medium.jpg/1647334212592.jpg", TipoEscuderia.ALPINE.name()));
             pilotosRepository.insert(new Pilotos(2,"Steban Ocon", "25", "imagen", TipoEscuderia.ALPINE.name()));
             pilotosRepository.insert(new Pilotos(3,"Steban Ocon", "25", "imagen", TipoEscuderia.ALPINE.name()));
             pilotosRepository.insert(new Pilotos(4,"Steban Ocon", "25", "imagen", TipoEscuderia.ALPINE.name()));
