@@ -11,4 +11,5 @@
     <string name="menu_home">Noticias</string>
     <string name="menu_gallery">Pilotos</string>
     <string name="menu_slideshow">Circuitos</string>
+    <string name="menu_clasificacion">Clasificación Pilotos</string>
 </resources>

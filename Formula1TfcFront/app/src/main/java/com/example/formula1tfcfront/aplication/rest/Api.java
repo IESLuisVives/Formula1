@@ -1,10 +1,7 @@
 package com.example.formula1tfcfront.aplication.rest;
 
 
-import com.example.formula1tfcfront.aplication.rest.model.Circuito;
-import com.example.formula1tfcfront.aplication.rest.model.Noticia;
-import com.example.formula1tfcfront.aplication.rest.model.Piloto;
-import com.example.formula1tfcfront.aplication.rest.model.Usuario;
+import com.example.formula1tfcfront.aplication.rest.model.*;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -35,6 +32,9 @@ public interface Api {
 
     @GET("/circuito/all")
     Call<List<Circuito>> obtenerCircuitos();
+
+    @GET("/clasificacion/all")
+    Call<List<ClasificacionPiloto>> obtenerClasificacionPilotos();
 
     @POST("/cliente/post")
     Call<Usuario> crearUsuario(@Body Usuario usuario);

@@ -22,4 +22,7 @@
             android:name="com.example.formula1tfcfront.aplication.ui.circuitos.Circuitos"
             android:label="@string/menu_slideshow"
             tools:layout="@layout/fragment_circuitos"/>
+    <fragment android:id="@+id/clasificacionFragment"
+              android:name="com.example.formula1tfcfront.aplication.ui.clasificacion.ClasificacionFragment"
+              android:label="fragment_clasificacion" tools:layout="@layout/fragment_clasificacion"/>
 </navigation>
