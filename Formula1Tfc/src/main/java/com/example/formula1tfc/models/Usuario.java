@@ -1,77 +1,103 @@
 package com.example.formula1tfc.models;
 
-import com.example.formula1tfc.configuration.views.Views;
-import com.fasterxml.jackson.annotation.JsonView;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.Set;
 
-import javax.persistence.Basic;
-import javax.persistence.Embedded;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import java.util.UUID;
-
-@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+@Builder
+@Table(name = "usuario")
+@NamedQuery(name = "usuario.findAll", query = "SELECT u FROM Usuario u")
 @NoArgsConstructor
-public abstract class Usuario {
-
-    @JsonView({Views.Admin.class, Views.Cliente.class})
-    private UUID id;
-    @JsonView({Views.Admin.class, Views.Cliente.class})
-    private String nombre;
-    @JsonView({Views.Admin.class, Views.Cliente.class})
-    private String email;
-    @JsonView({Views.Admin.class, Views.Cliente.class})
-    private String password;
-    @JsonView({Views.Admin.class, Views.Cliente.class})
-    private String foto;
-    /*@JsonView({Views.Admin.class, Views.Cliente.class})
-    private Login login;*/
-
-    public Usuario(String nombre, String email, String password, String foto) {
-        this.nombre = nombre;
-        this.email = email;
-        this.password = password;
-        this.foto = foto;
-        id = UUID.randomUUID();
-    }
-
-    //TEST
-    public Usuario(UUID id, String nombre, String correo, String password, String foto) {
-        this.id = id;
-        this.nombre = nombre;
-        this.email = correo;
-        this.password = password;
-        this.foto = foto;
-    }
+@AllArgsConstructor
+@Entity
+public class Usuario implements UserDetails {
 
     @Id
-    public UUID getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Basic
+    @Column(name = "correo")
+    private String correo;
+
+    @Basic
+    @Column(name = "nombre")
+    private String username;
+
+    @Basic
+    @Column(name = "contraseña")
+    private String password;
+
+    @Basic
+    @Column(name = "imagen")
+    private String imagen;
+
+    @OneToOne
+    @JoinColumn(name = "login", referencedColumnName = "id")
+    private Login login;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    private Set<UserRole> roles;
+
+    public long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    @Basic
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    @Basic
     public String getCorreo() {
-        return email;
+        return correo;
     }
 
-    public void setCorreo(String corre) {
-        this.email = corre;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
-    @Basic
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
     public String getPassword() {
         return password;
     }
@@ -80,22 +106,36 @@ public abstract class Usuario {
         this.password = password;
     }
 
-    @Basic
-    public String getFoto() {
-        return foto;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setFoto(String foto) {
-        this.foto = foto;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
-    /*@Embedded
     public Login getLogin() {
         return login;
     }
 
     public void setLogin(Login login) {
         this.login = login;
-    }*/
-}
+    }
 
+    public Set<UserRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<UserRole> roles) {
+        this.roles = roles;
+    }
+
+    public Usuario(long id, String correo, String username, String password, String imagen, Set<UserRole> roles) {
+        this.id = id;
+        this.correo = correo;
+        this.username = username;
+        this.password = password;
+        this.imagen = imagen;
+        this.roles = roles;
+    }
+}

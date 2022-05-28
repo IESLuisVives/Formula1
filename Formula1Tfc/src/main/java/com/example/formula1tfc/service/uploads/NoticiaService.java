@@ -1,16 +1,13 @@
 package com.example.formula1tfc.service.uploads;
 
 import com.example.formula1tfc.models.Noticia;
-import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -49,7 +46,7 @@ public class NoticiaService {
         try{
             Document document = Jsoup.connect(urlReal).get();
 
-            Element element = document.getElementsByAttributeValue("id","td_uid_9_628d287346be8").first();
+            Element element = document.getElementsByAttributeValue("id","td_uid_9_6290fd778d5b3").first();
             Elements elements = element.getElementsByTag("img");
 
             Elements prueba =  new Elements();
@@ -58,12 +55,10 @@ public class NoticiaService {
 
 
             for (Element ads: prueba){
-
                 Noticia responseDTO = new Noticia();
-                responseDTO.setTitulo(ads.attr("title"));
-                //responseDTO.setUrl("");
-                responseDTO.setImagen(ads.attr("data-img-url"));
 
+                responseDTO.setTitulo(ads.attr("title"));
+                responseDTO.setImagen(ads.attr("data-img-url"));
 
                 if (!Objects.equals(responseDTO.getTitulo(), "") && !Objects.equals(responseDTO.getImagen(), "")) {
                     responseDTOS.add(responseDTO);

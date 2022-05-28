@@ -1,13 +1,12 @@
 package com.example.formula1tfc.controller;
 
-import com.example.formula1tfc.configuration.views.Views;
+
 import com.example.formula1tfc.dto.CircuitoDTO;
 import com.example.formula1tfc.error.GeneralError;
 import com.example.formula1tfc.mapper.CircuitoMapper;
 import com.example.formula1tfc.models.Circuito;
 import com.example.formula1tfc.repository.CircuitoRepository;
 import com.example.formula1tfc.service.uploads.StorageService;
-import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -30,7 +29,6 @@ public class CircuitoController {
 
     @ApiOperation(value = "Get All Circuitos", notes = "Devuelve una lista de circuitos.")
     @ApiResponse(code = 200, message = "OK", response = CircuitoDTO.class)
-    @JsonView(Views.Circuito.class)
     @GetMapping(value = "/all")
     public ResponseEntity<List<CircuitoDTO>> getAllCircuitos() {
         return ResponseEntity.status(HttpStatus.OK).body(mapper.toDTOList(repository.findAll()));
@@ -41,9 +39,8 @@ public class CircuitoController {
             @ApiResponse(code = 200, message = "OK", response = CircuitoDTO.class),
             @ApiResponse(code = 400, message = "BAD_REQUEST", response = GeneralError.class)
     })
-    @JsonView(Views.Circuito.class)
-    @GetMapping("/id")
-    public ResponseEntity getCircuitoById(@RequestParam(name = "id", required = true) int id) {
+    @GetMapping("/{id}")
+    public ResponseEntity getCircuitoById(@PathVariable int id) {
         Optional<Circuito> circuito = repository.findById(id);
         if (circuito.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new GeneralError());
@@ -54,7 +51,6 @@ public class CircuitoController {
 
     @ApiOperation(value = "Post Circuito", notes = "Devuelve el circuito que se ha insertado.")
     @ApiResponse(code = 201, message = "Created", response = CircuitoDTO.class)
-    @JsonView(Views.Circuito.class)
     @PostMapping("/post")
     public ResponseEntity<CircuitoDTO> postCircuito(@RequestBody CircuitoDTO circuitoDTO, @RequestPart("file") MultipartFile file) {
         Circuito circuito = mapper.toModel(circuitoDTO);
@@ -71,7 +67,6 @@ public class CircuitoController {
             @ApiResponse(code = 204, message = "No Content", response = CircuitoDTO.class),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralError.class)
     })
-    @JsonView(Views.Circuito.class)
     @DeleteMapping("/delete")
     public ResponseEntity deleteCircuito(@RequestParam(name = "id", required = true) int id) {
         repository.deleteById(id);
@@ -85,7 +80,6 @@ public class CircuitoController {
 
     @ApiOperation(value = "Put Circuito", notes = "Devuelve el circuito que ha sido modificado.")
     @ApiResponse(code = 200, message = "OK", response = CircuitoDTO.class)
-    @JsonView(Views.Circuito.class)
     @PutMapping("/update")
     public ResponseEntity<CircuitoDTO> updateCircuito(@RequestBody CircuitoDTO circuitoDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(mapper.toDTO(repository.save(mapper.toModel(circuitoDTO))));

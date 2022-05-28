@@ -1,8 +1,6 @@
 package com.example.formula1tfc.mapper;
 
-import com.example.formula1tfc.dto.AdminDTO;
 import com.example.formula1tfc.dto.PilotosDTO;
-import com.example.formula1tfc.models.Admin;
 import com.example.formula1tfc.models.Pilotos;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

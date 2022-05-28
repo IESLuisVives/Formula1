@@ -17,7 +17,6 @@ import java.util.Set;
 @Service
 public class ClasificacionService {
 
-    //private String urlReal = "https://www.motor.es/formula-1/clasificacion-2022";
     private String urlReal = "https://www.formula1.com/en/results.html/2022/drivers.html";
     private String urlReal2 = "https://www.formula1.com/en/results.html/2022/team.html";
 

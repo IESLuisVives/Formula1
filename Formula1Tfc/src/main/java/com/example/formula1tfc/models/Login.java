@@ -1,43 +1,50 @@
 package com.example.formula1tfc.models;
 
-import com.example.formula1tfc.configuration.views.Views;
-import com.fasterxml.jackson.annotation.JsonView;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Basic;
-import javax.persistence.Embeddable;
-import java.time.LocalDateTime;
-import java.util.UUID;
+import javax.persistence.*;
 
-@Embeddable
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "login")
+@NamedQuery(name = "login.findAll", query = "SELECT l FROM Login l")
 public class Login {
-    @JsonView(Views.Admin.class)
-    private LocalDateTime fecha;
-    @JsonView({Views.Cliente.class, Views.Admin.class})
-    private UUID token;
 
-    public Login() {
-    }
+    private long id;
+    private Boolean activo;
+    private String token;
+    //private Usuario usuario;
 
-    public Login(LocalDateTime fecha, UUID token) {
-        this.fecha = fecha;
-        this.token = token;
-    }
+    @Id
+    @GeneratedValue
+    public long getId() {return id;}
+    public void setId(long id) {this.id = id;}
 
     @Basic
-    public LocalDateTime getFecha() {
-        return fecha;
-    }
+    @Column(name="esta_activo")
+    public Boolean getActivo() {return activo;}
+    public void setActivo(Boolean activo) {this.activo = activo;}
+/*
+    @OneToOne
+    @JoinColumn(name = "usuario", referencedColumnName = "id")
+    public Usuario getUsuario() {return usuario;}
+    public void setUsuario(Usuario usuario) {this.usuario = usuario;}
 
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
-    }
+ */
 
     @Basic
-    public UUID getToken() {
-        return token;
-    }
+    @Column(name = "token")
+    public String getToken() {return token;}
+    public void setToken(String token) {this.token = token;}
 
-    public void setToken(UUID token) {
-        this.token = token;
+    @Override
+    public String toString() {
+        return "Login:{" +
+                "id=" + id +
+                ", activo=" + activo +
+                ", token='" + token + '\'' +
+                '}';
     }
 }

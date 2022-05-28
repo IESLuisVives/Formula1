@@ -1,23 +1,16 @@
 package com.example.formula1tfc.dto;
 
-import com.example.formula1tfc.configuration.views.Views;
-import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.annotations.ApiModelProperty;
 
 public class CircuitoDTO {
-    @JsonView(Views.Circuito.class)
     @ApiModelProperty(value = "Id circuito", dataType = "int", position = 1)
     private int id;
-    @JsonView(Views.Circuito.class)
     @ApiModelProperty(value = "Pais", dataType = "String", position = 2)
     private String pais;
-    @JsonView(Views.Circuito.class)
     @ApiModelProperty(value = "Vuelta Rapida", dataType = "String", position = 3)
     private String vueltaRapida;
-    @JsonView(Views.Circuito.class)
     @ApiModelProperty(value = "Longitud", dataType = "String", position = 4)
     private String longitud;
-    @JsonView(Views.Circuito.class)
     @ApiModelProperty(value = "Imagen", dataType = "String", position = 5)
     private String imagen;
 
