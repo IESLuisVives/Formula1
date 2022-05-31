@@ -65,7 +65,8 @@ public class Pilotos extends Fragment {
             public void onResponse(Call<List<Piloto>> call, Response<List<Piloto>> response) {
                 pilotosList = response.body();
                 listaPilotos = new ArrayAdapter<Piloto>(getActivity(), android.R.layout.simple_list_item_1,pilotosList);
-                binding.listaPilotos.setAdapter(listaPilotos);
+                //CAMBIAR TOOOOOODOOOO
+                //binding.recyclerPilotos.setAdapter(listaPilotos);
             }
 
             @Override

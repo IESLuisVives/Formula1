@@ -1,6 +1,6 @@
 package com.example.formula1tfcfront.aplication.ui.noticias;
 
-import android.net.Uri;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.formula1tfcfront.R;
 import com.example.formula1tfcfront.aplication.rest.model.Noticia;
-
-import java.util.ArrayList;
+import com.bumptech.glide.Glide;
+import java.util.List;
 
 public class NoticiaRecyclerAdapter extends RecyclerView.Adapter<NoticiaRecyclerAdapter.ViewHolder> {
 
     //declarar las variables
-    ArrayList<Noticia> notaList;
+    List<Noticia> noticiaList;
+    Context context;
 
     //generamos el constructor
-    public NoticiaRecyclerAdapter(ArrayList<Noticia> notaList) {
 
-        this.notaList = notaList;
+    public NoticiaRecyclerAdapter(List<Noticia> noticiaList, Context context) {
+        this.noticiaList = noticiaList;
+        this.context = context;
     }
-
 
     @NonNull
     @Override
@@ -40,18 +41,18 @@ public class NoticiaRecyclerAdapter extends RecyclerView.Adapter<NoticiaRecycler
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
 
-        Noticia elementoItem = notaList.get(position);
+        Noticia elementoItem = noticiaList.get(position);
 
-        holder.textViewTitulo.setText(notaList.get(position).getTitulo());
-        holder.textViewDescripcion.setText(notaList.get(position).getUrl());
-        Uri uri = Uri.parse(notaList.get(position).getImagen());
-        holder.imageViewFoto.setImageURI(uri);
+        holder.textViewTitulo.setText(elementoItem.getTitulo());
+        Glide.with(context)
+                .load(elementoItem.getImagen())
+                .into(holder.imageViewFoto);
     }
 
     @Override
     public int getItemCount() {
         //metodo que devuelve el numero de elementos de la lista
-        return notaList.size();
+        return noticiaList.size();
     }
 
     //elementos del layout
@@ -66,7 +67,6 @@ public class NoticiaRecyclerAdapter extends RecyclerView.Adapter<NoticiaRecycler
 
             //instaciar los objetos
             textViewTitulo = itemView.findViewById(R.id.textView_titulo);
-            textViewDescripcion = itemView.findViewById(R.id.textView_decripcion);
             imageViewFoto = itemView.findViewById(R.id.imageView2);
 
         }

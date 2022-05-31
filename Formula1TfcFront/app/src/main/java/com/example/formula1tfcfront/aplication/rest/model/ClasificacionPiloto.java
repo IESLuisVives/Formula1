@@ -4,6 +4,7 @@ public class ClasificacionPiloto {
     private String posicion;
     private String nombrePiloto;
     private String puntos;
+    private String escuderia;
     private String bandera;
 
     public String getPosicion() {
@@ -38,12 +39,21 @@ public class ClasificacionPiloto {
         this.bandera = bandera;
     }
 
+    public String getEscuderia() {
+        return escuderia;
+    }
+
+    public void setEscuderia(String escuderia) {
+        this.escuderia = escuderia;
+    }
+
     @Override
     public String toString() {
-        return
+        return "ClasificacionPiloto{" +
                 "posicion='" + posicion + '\'' +
                 ", nombrePiloto='" + nombrePiloto + '\'' +
                 ", puntos='" + puntos + '\'' +
+                ", escuderia='" + escuderia + '\'' +
                 ", bandera='" + bandera + '\'' +
                 '}';
     }

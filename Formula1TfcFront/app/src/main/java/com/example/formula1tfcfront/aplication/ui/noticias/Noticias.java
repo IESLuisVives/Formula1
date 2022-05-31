@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.formula1tfcfront.R;
 import com.example.formula1tfcfront.aplication.rest.Api;
 import com.example.formula1tfcfront.aplication.rest.ApiConfig;
 import com.example.formula1tfcfront.aplication.rest.model.Noticia;
@@ -16,53 +19,39 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Noticias#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Noticias extends Fragment {
 
-    private FragmentNoticiasBinding binding;
-    private ArrayAdapter<Noticia> listaNoticias;
-    private Api api;
-    private List<Noticia> noticiasList;
 
-    public Noticias() {
-        // Required empty public constructor
-    }
-
-    public static Noticias newInstance(String param1, String param2) {
-        Noticias fragment = new Noticias();
-        return fragment;
-    }
+     List<Noticia> noticiasList = new ArrayList<>();
+    NoticiaRecyclerAdapter adapter;
+    LinearLayoutManager layoutManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        api = ApiConfig.getClient().create(Api.class);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentNoticiasBinding.inflate(inflater,container,false);
-        obtenerNoticias();
-        return binding.getRoot();
-    }
+        View view = inflater.inflate(R.layout.fragment_noticias,container,false);
+        Api api = ApiConfig.getClient().create(Api.class);
+        RecyclerView recyclerView = view.findViewById(R.id.listaNoticiasHome);
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
 
-    private void obtenerNoticias(){
         Call<List<Noticia>> allNoticias = api.obtenerNoticias();
 
         allNoticias.enqueue(new Callback<List<Noticia>>() {
             @Override
             public void onResponse(Call<List<Noticia>> call, Response<List<Noticia>> response) {
                 noticiasList = response.body();
-                listaNoticias = new ArrayAdapter<Noticia>(getActivity(), android.R.layout.simple_list_item_1,noticiasList);
-                binding.listaHome.setAdapter(listaNoticias);
+                adapter = new NoticiaRecyclerAdapter(noticiasList,getActivity());
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
@@ -70,5 +59,6 @@ public class Noticias extends Fragment {
                 Toast.makeText(getActivity(), "Fallo al comunicar con la base de datos", Toast.LENGTH_SHORT).show();
             }
         });
+        return view;
     }
 }

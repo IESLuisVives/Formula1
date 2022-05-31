@@ -6,6 +6,7 @@
         <entry key="..\:/Users/saulm/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.1717325227963526" />
         <entry key="..\:/Users/saulm/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_2.xml" value="0.171875" />
         <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/activity_home.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/activity_main.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/activity_user.xml" value="0.3489583333333333" />
@@ -15,10 +16,14 @@
         <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/fragment_clasificacion.xml" value="0.25" />
         <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/fragment_login.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/fragment_noticias.xml" value="0.3489583333333333" />
-        <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/fragment_pilotos.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/fragment_pilotos.xml" value="0.33" />
         <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/fragment_register.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/fragment_user.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/list_item.xml" value="0.33" />
+        <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/list_itemPilotos.xml" value="0.1703125" />
+        <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/list_item_circuitos.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/list_item_clasificacion.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/list_item_pilotos.xml" value="0.34791666666666665" />
         <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/layout/nav_header_home.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/menu/activity_main_drawer.xml" value="0.36354166666666665" />
         <entry key="..\:/Users/saulm/Desktop/Formula1/Formula1TfcFront/app/src/main/res/menu/home.xml" value="0.36354166666666665" />

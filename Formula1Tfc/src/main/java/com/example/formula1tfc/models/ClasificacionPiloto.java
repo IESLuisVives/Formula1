@@ -7,5 +7,6 @@ public class ClasificacionPiloto {
     private String posicion;
     private String nombrePiloto;
     private String puntos;
+    private String escuderia;
     private String bandera;
 }

@@ -36,16 +36,15 @@ public class ClasificacionService {
 
             for (Element ads: prueba){
                 ClasificacionPiloto responseDTO = new ClasificacionPiloto();
-                responseDTO.setNombrePiloto(ads.getElementsByClass("hide-for-mobile").html());
+                responseDTO.setNombrePiloto(ads.getElementsByClass("hide-for-tablet").html()+" "+ads.getElementsByClass("hide-for-mobile").html());
                 responseDTO.setBandera(ads.getElementsByClass("dark semi-bold uppercase").text());
                 responseDTO.setPuntos(ads.getElementsByClass("dark bold").html());
+                responseDTO.setEscuderia(ads.getElementsByClass("grey semi-bold uppercase ArchiveLink").html());
                 responseDTO.setPosicion(ads.getElementsByClass("limiter").next().html());
 
                 if (!Objects.equals(responseDTO.getNombrePiloto(), "") && !Objects.equals(responseDTO.getPuntos(), "")){
                     responseDTOS.add(responseDTO);
                 }
-
-
             }
 
         } catch (IOException e) {
