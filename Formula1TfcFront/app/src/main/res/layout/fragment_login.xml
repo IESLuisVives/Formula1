@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColorHint="@color/red"
-            android:background="@color/white"
+            android:background="@drawable/redondear"
             android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/et_email_login" app:layout_constraintTop_toBottomOf="@+id/tv_login"
@@ -27,33 +27,47 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:background="@color/white"
+            android:background="@drawable/redondear"
             android:textColorHint="@color/red"
             android:ems="10"
             android:id="@+id/et_password_login" app:layout_constraintTop_toBottomOf="@+id/et_email_login"
             app:layout_constraintEnd_toEndOf="@+id/et_email_login"
             app:layout_constraintStart_toStartOf="@+id/et_email_login"
             android:layout_marginTop="20dp" android:hint="Password" android:minHeight="48dp"/>
+
     <Button
-            android:text="Register"
-            android:layout_width="wrap_content"
-            android:textColor="@color/red"
-            android:backgroundTint="@color/white"
-            android:layout_height="wrap_content" android:id="@+id/button_go_to_register"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="35dp" android:layout_marginBottom="35dp"/>
+        android:id="@+id/button_go_to_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="35dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/redondear"
+        android:text="Register"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
-            android:text="log in"
-            android:layout_width="wrap_content"
-            android:textColor="@color/red"
-            android:backgroundTint="@color/white"
-            android:layout_height="wrap_content" android:id="@+id/button_loggin"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="35dp"
-            app:layout_constraintBottom_toBottomOf="@+id/button_go_to_register"/>
+        android:id="@+id/button_loggin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/redondear"
+        android:text="log in"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toBottomOf="@+id/button_go_to_register"
+        app:layout_constraintEnd_toEndOf="parent" />
     <ImageView
             android:src="@drawable/logof1"
             android:layout_width="0dp"
             android:layout_height="206dp" android:id="@+id/iv_login"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:srcCompat="@drawable/logof1"/>
+    <ImageView
+            android:src="@drawable/haas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/imageView6"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/et_password_login"
+            android:layout_marginTop="12dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

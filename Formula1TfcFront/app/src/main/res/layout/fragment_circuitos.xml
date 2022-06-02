@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent"
-                                                   tools:context=".aplication.ui.circuitos.Circuitos">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".aplication.ui.circuitos.Circuitos">
+
     <TextView
-            android:text="TextView"
-            android:layout_width="177dp"
-            android:layout_height="45dp" android:id="@+id/tituloCircuitos"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="56dp" android:layout_marginStart="116dp" android:textSize="34sp"
-            android:textAlignment="center"/>
-    <ListView
-            android:layout_width="411dp"
-            android:layout_height="547dp"
-            app:layout_constraintTop_toBottomOf="@+id/tituloCircuitos"
-            android:layout_marginTop="80dp" app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/listaCircuitos"/>
+        android:id="@+id/tituloCircuitos"
+        android:layout_width="177dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="56dp"
+        android:text="Circuitos"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listaCircuitosRecycler"
+        android:layout_width="408dp"
+        android:layout_height="554dp"
+        android:layout_marginTop="72dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tituloCircuitos" />
 </androidx.constraintlayout.widget.ConstraintLayout>

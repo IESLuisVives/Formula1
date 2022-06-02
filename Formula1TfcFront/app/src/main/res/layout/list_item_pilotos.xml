@@ -2,4 +2,74 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
-                                                   android:layout_height="wrap_content"/>
+                                                   android:layout_height="wrap_content">
+
+    <ImageView
+            android:id="@+id/imagenPilotoItem"
+            android:layout_width="144dp"
+            android:layout_height="105dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars"/>
+
+    <TextView
+            android:id="@+id/nombrePilotoItem2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:text="Nombre:"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imagenPilotoItem"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+            android:id="@+id/edadPilotoItem2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:text="Edad:"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imagenPilotoItem"
+            app:layout_constraintTop_toBottomOf="@+id/nombrePilotoItem2"/>
+
+    <TextView
+            android:id="@+id/escuderiaPilotoItem2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:text="Escuderia:"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imagenPilotoItem"
+            app:layout_constraintTop_toBottomOf="@+id/edadPilotoItem2"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="149dp"
+            android:layout_height="30dp" android:id="@+id/nombrePilotoItem"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toEndOf="@+id/nombrePilotoItem2"
+            android:layout_marginTop="16dp" android:layout_marginStart="12dp" android:textSize="20sp"
+            android:textColor="#FFFFFF"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="91dp"
+            android:layout_height="29dp" android:id="@+id/edadPilotoItem"
+            app:layout_constraintTop_toBottomOf="@+id/nombrePilotoItem"
+            app:layout_constraintStart_toEndOf="@+id/edadPilotoItem2" android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp" android:textColor="#FFFFFF" android:textSize="20sp"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="146dp"
+            android:layout_height="26dp" android:id="@+id/escuderiaPilotoItem"
+            app:layout_constraintStart_toEndOf="@+id/escuderiaPilotoItem2"
+            android:layout_marginStart="4dp" app:layout_constraintTop_toBottomOf="@+id/edadPilotoItem"
+            android:layout_marginTop="4dp" android:textSize="20sp" android:textColor="#FFFFFF"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

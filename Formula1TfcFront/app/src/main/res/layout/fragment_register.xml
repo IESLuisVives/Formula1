@@ -20,19 +20,19 @@
             app:layout_constraintBottom_toBottomOf="@+id/iv_register" android:layout_marginEnd="25dp"
             android:textColor="#FFFFFF"/>
     <ScrollView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="397dp"
+            android:layout_height="291dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toTopOf="@+id/button_go_to_login"
             app:layout_constraintTop_toBottomOf="@+id/iv_register" android:layout_marginTop="25dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp" app:layout_constraintVertical_bias="0.0" android:id="@+id/scrollView2">
         <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                       android:orientation="vertical" android:gravity="center">
             <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:background="@color/white"
+                    android:background="@drawable/redondear"
                     android:textColorHint="@color/red"
                     android:ems="10"
                     android:id="@+id/et_username_register" android:hint="Username"
@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:background="@color/white"
+                    android:background="@drawable/redondear"
                     android:textColorHint="@color/red"
                     android:ems="10"
                     android:id="@+id/et_email_register"
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:background="@color/white"
+                    android:background="@drawable/redondear"
                     android:textColorHint="@color/red"
                     android:ems="10"
                     android:id="@+id/et_password_register"
@@ -61,7 +61,7 @@
             <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@drawable/redondear"
                     android:textColorHint="@color/red"
                     android:inputType="textPassword"
                     android:ems="10"
@@ -73,6 +73,7 @@
     <Button
             android:text="Log in"
             android:layout_width="wrap_content"
+            android:background="@drawable/redondear"
             android:backgroundTint="@color/white"
             android:textColor="@color/red"
             android:layout_height="wrap_content" android:id="@+id/button_go_to_login"
@@ -81,9 +82,15 @@
     <Button
             android:text="Register"
             android:layout_width="wrap_content"
+            android:background="@drawable/redondear"
             android:backgroundTint="@color/white"
             android:textColor="@color/red"
             android:layout_height="wrap_content" android:id="@+id/button_ok_register"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="@+id/button_go_to_login"
             android:layout_marginEnd="35dp"/>
+    <ImageView
+            android:src="@drawable/haas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/imageView5"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2" app:layout_constraintStart_toStartOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

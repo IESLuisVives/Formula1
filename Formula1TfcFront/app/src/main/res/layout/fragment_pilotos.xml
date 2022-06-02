@@ -3,14 +3,22 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   tools:context=".aplication.ui.pilotos.Pilotos">
+                                                   tools:context=".aplication.ui.pilotos.Pilotos"
+    android:background="@color/black">
+
     <TextView
-            android:text="TextView"
-            android:layout_width="177dp"
-            android:layout_height="45dp" android:id="@+id/tituloPilotos"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="56dp" android:layout_marginStart="116dp" android:textSize="34sp"
-            android:textAlignment="center"/>
+        android:id="@+id/tituloPilotos"
+        android:layout_width="177dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="56dp"
+        android:text="Pilotos"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="409dp"
             android:layout_height="584dp"

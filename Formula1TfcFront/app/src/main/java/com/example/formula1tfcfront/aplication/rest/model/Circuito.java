@@ -3,6 +3,7 @@ package com.example.formula1tfcfront.aplication.rest.model;
 public class Circuito {
     private int id;
     private String pais;
+    private String nombreCircuito;
     private String vueltaRapida;
     private String longitud;
     private String imagen;
@@ -21,6 +22,14 @@ public class Circuito {
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+
+    public String getNombreCircuito() {
+        return nombreCircuito;
+    }
+
+    public void setNombreCircuito(String nombreCircuito) {
+        this.nombreCircuito = nombreCircuito;
     }
 
     public String getVueltaRapida() {
@@ -49,7 +58,9 @@ public class Circuito {
 
     @Override
     public String toString() {
-        return pais + '\'' +
+        return "Circuito{" +
+                "pais='" + pais + '\'' +
+                ", nombreCircuito='" + nombreCircuito + '\'' +
                 ", vueltaRapida='" + vueltaRapida + '\'' +
                 ", longitud='" + longitud + '\'' +
                 ", imagen='" + imagen + '\'' +
