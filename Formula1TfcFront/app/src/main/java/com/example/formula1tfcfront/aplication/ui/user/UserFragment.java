@@ -16,11 +16,7 @@ import com.example.formula1tfcfront.aplication.ui.Intercambio;
 import com.example.formula1tfcfront.databinding.FragmentUserBinding;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UserFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class UserFragment extends Fragment {
 
     private FragmentUserBinding binding;
@@ -30,15 +26,6 @@ public class UserFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UserFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static UserFragment newInstance(String param1, String param2) {
         UserFragment fragment = new UserFragment();
         return fragment;
@@ -57,8 +44,8 @@ public class UserFragment extends Fragment {
         binding = FragmentUserBinding.inflate(inflater,container,false);
 
         binding.buttonDarseDeBajaUprofile.setBackgroundColor(Color.RED);
-        //binding.tvEmailUprofile.setText(Intercambio.getInstance().getUsuario().getCorreo());
-        //binding.tvUsernameUprofile.setText(Intercambio.getInstance().getUsuario().getNombre());
+        binding.tvEmailUprofile.setText(Intercambio.getInstance().getUsuario().toString());
+        //binding.tvUsernameUprofile.setText(Intercambio.getInstance().getUsuario().getCorreo());
 
         setOnClick();
 

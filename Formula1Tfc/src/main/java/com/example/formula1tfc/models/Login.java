@@ -2,8 +2,10 @@ package com.example.formula1tfc.models;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
@@ -12,20 +14,24 @@ import javax.persistence.*;
 @NamedQuery(name = "login.findAll", query = "SELECT l FROM Login l")
 public class Login {
 
-    private long id;
-    private Boolean activo;
+    private String id;
     private String token;
-    //private Usuario usuario;
+    @ToString.Exclude
+    private Usuario usuario;
+
+
+    public Login(String token, Usuario usuario) {
+        this.id = UUID.randomUUID().toString();
+        this.token = token;
+        this.usuario = usuario;
+    }
 
     @Id
     @GeneratedValue
-    public long getId() {return id;}
-    public void setId(long id) {this.id = id;}
+    public String getId() {return id;}
+    public void setId(String id) {this.id = id;}
 
-    @Basic
-    @Column(name="esta_activo")
-    public Boolean getActivo() {return activo;}
-    public void setActivo(Boolean activo) {this.activo = activo;}
+
 /*
     @OneToOne
     @JoinColumn(name = "usuario", referencedColumnName = "id")
@@ -33,6 +39,15 @@ public class Login {
     public void setUsuario(Usuario usuario) {this.usuario = usuario;}
 
  */
+    @ManyToOne
+    @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     @Basic
     @Column(name = "token")
@@ -41,10 +56,10 @@ public class Login {
 
     @Override
     public String toString() {
-        return "Login:{" +
+        return "Login{" +
                 "id=" + id +
-                ", activo=" + activo +
                 ", token='" + token + '\'' +
+                ", usuario=" + usuario +
                 '}';
     }
 }

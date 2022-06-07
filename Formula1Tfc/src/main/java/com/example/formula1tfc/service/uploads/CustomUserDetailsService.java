@@ -17,7 +17,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return usuarioService.findUserByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username + " no encontrado"));
     }
 
-    public UserDetails loadUSerById(Long id) throws UsernameNotFoundException {
+    public UserDetails loadUSerById(String id) throws UsernameNotFoundException {
         return usuarioService.findUsuarioById(id).orElseThrow(() -> new UsuarioNotFoundException(id));
     }
 }

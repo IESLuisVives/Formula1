@@ -9,17 +9,14 @@ import java.util.List;
 import java.util.UUID;
 
 public interface Api {
-    @GET("/cliente/login")
-    Call<Usuario> loginWithToken(@Query(value="token") UUID token,
-                                 @Query(value="mail")String mail,
+    @POST("/auth/login")
+    Call<Usuario> loginWithToken(@Query(value="username")String mail,
                                  @Query(value="password")String password);
 
-    @GET("/cliente/login")
-    Call<Usuario> loginWithoutToken(@Query(value="mail")String mail,
-                                    @Query(value="password")String password);
 
-    @GET("/piloto/all")
-    Call<List<Piloto>> obtenerTodosPilotos();
+
+    @GET("/usuario/name/{username}")
+    Call<Usuario> usuarioPorNombre(@Path("username") String username);
 
     @GET("/circuito/all")
     Call<List<Circuito>> obtenerTodosCircuitos();
@@ -36,11 +33,13 @@ public interface Api {
     @GET("/clasificacion/all")
     Call<List<ClasificacionPiloto>> obtenerClasificacionPilotos();
 
-    @POST("/cliente/post")
+    @POST("/usuario/save")
     Call<Usuario> crearUsuario(@Body Usuario usuario);
 
-    @PUT("/cliente/put")
-    Call<Usuario> reservaUsuario(@Body Usuario usuario);
+    @POST("/usuario/login")
+    Call<Usuario> login(@Body LoginEntity login);
+
+
 
 
 

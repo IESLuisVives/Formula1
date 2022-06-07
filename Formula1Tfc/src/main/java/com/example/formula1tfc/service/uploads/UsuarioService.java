@@ -25,7 +25,7 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public Optional<Usuario> findUsuarioById(Long usuarioId) {
+    public Optional<Usuario> findUsuarioById(String usuarioId) {
         return usuarioRepository.findById(usuarioId);
     }
 
@@ -36,6 +36,7 @@ public class UsuarioService {
     public Usuario saveUsuario(CreateUserDTO newUsuario) throws Exception {
 
         Usuario usuario = Usuario.builder()
+
                     .username(newUsuario.getUsername())
                     .password(passwordEncoder.encode(newUsuario.getPassword()))
                     .correo(newUsuario.getCorreo())
