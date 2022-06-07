@@ -16,7 +16,7 @@ public class JwtUserResponse extends UsuarioDTO {
     private String token;
 
     @Builder(builderMethodName = "jwtUserResponseBuilder")
-    public JwtUserResponse(long id, @NotBlank(message = "Debes introducir un nombre") String username, @NotBlank(message = "Debes introducir un correo") String correo, String password, String imagen, Set<String> roles, String token) {
+    public JwtUserResponse(String id, @NotBlank(message = "Debes introducir un nombre") String username, @NotBlank(message = "Debes introducir un correo") String correo, String password, String imagen, Set<String> roles, String token) {
         super(id, username, correo, password, imagen, roles);
         this.token = token;
     }

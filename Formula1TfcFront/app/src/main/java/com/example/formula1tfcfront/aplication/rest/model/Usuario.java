@@ -1,29 +1,31 @@
 package com.example.formula1tfcfront.aplication.rest.model;
 
+import java.util.Set;
 import java.util.UUID;
 
 public class Usuario {
-    private UUID id;
-    private String nombre;
+    private String id;
+    private String username;
     private String correo;
     private String password;
-    private String foto;
-    private Login login;
+    private String imagen;
+    private Set<UserRoles> roles;
+    private String token;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getCorreo() {
@@ -42,19 +44,52 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getFoto() {
-        return foto;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setFoto(String foto) {
-        this.foto = foto;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
-    public Login getLogin() {
-        return login;
+    public Set<UserRoles> getRoles() {
+        return roles;
     }
 
-    public void setLogin(Login login) {
-        this.login = login;
+    public void setRoles(Set<UserRoles> roles) {
+        this.roles = roles;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public Usuario() {
+    }
+
+    public Usuario( String username, String correo, String password, String imagen, Set<UserRoles> roles, String token) {
+        this.id = UUID.randomUUID().toString();
+        this.username = username;
+        this.correo = correo;
+        this.password = password;
+        this.imagen = imagen;
+        this.roles = roles;
+        this.token = token;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", correo='" + correo + '\'' +
+                ", password='" + password + '\'' +
+                ", imagen='" + imagen + '\'' +
+                ", roles='" + roles + '\'' +
+                '}';
     }
 }

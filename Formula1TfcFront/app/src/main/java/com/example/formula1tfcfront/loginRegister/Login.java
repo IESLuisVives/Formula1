@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.formula1tfcfront.aplication.Home;
 import com.example.formula1tfcfront.aplication.rest.ApiConfig;
+import com.example.formula1tfcfront.aplication.rest.model.LoginEntity;
 import com.example.formula1tfcfront.aplication.rest.model.Usuario;
 import com.example.formula1tfcfront.databinding.FragmentLoginBinding;
 import com.example.formula1tfcfront.aplication.rest.Api;
@@ -18,13 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import java.util.UUID;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Login#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Login extends Fragment {
 
     private FragmentLoginBinding binding;
@@ -37,15 +32,6 @@ public class Login extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Login.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Login newInstance(String param1, String param2) {
         Login fragment = new Login();
         Bundle args = new Bundle();
@@ -62,11 +48,9 @@ public class Login extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         binding = FragmentLoginBinding.inflate(inflater,container,false);
 
-        checkSharedPreferences();
         setOnClick();
 
         return binding.getRoot();
@@ -77,16 +61,17 @@ public class Login extends Fragment {
         startActivity(intent);
     }
 
-    private boolean checkFields(){
-        return !binding.etEmailLogin.getText().toString().equalsIgnoreCase("") &&
-                !binding.etPasswordLogin.getText().toString().equalsIgnoreCase("");
+    private void vaciarCampos(){
+         binding.etEmailLogin.setText("");
+        binding.etPasswordLogin.setText("");
     }
 
     private void setOnClick(){
         binding.buttonLoggin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login();
+               loginUsuario(binding.etEmailLogin.getText().toString(),binding.etPasswordLogin.getText().toString());
+
             }
         });
 
@@ -98,85 +83,27 @@ public class Login extends Fragment {
         });
     }
 
-    private void login(){
-        openActivity(Home.class);
-        getActivity().finish();
-        /*if(checkFields()){
-            Call<Usuario> login = api.loginWithoutToken(binding.etEmailLogin.getText().toString(),
-                    binding.etPasswordLogin.getText().toString());
-            login.enqueue(new Callback<Usuario>() {
-                @Override
-                public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                    if(response.isSuccessful()&&response.code()==200){
-                        Toast.makeText(getActivity(), ""+response.code(), Toast.LENGTH_SHORT).show();
-                        loginSuccessful(response);
-                    }else{
-                        Toast.makeText(getActivity(), "Usuario y/o password incorrectos", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                @Override
-                public void onFailure(Call<Usuario> call, Throwable t) {
-                    Toast.makeText(getActivity(), "Error en petición", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }else{
-            Toast.makeText(getActivity(), "Hay campos vacios", Toast.LENGTH_SHORT).show();
-        }*/
-    }
-
-    private void loginSuccessful(Response<Usuario> response){
-        Usuario user =response.body();
-        Intercambio.getInstance().setUsuario(user);
-
-        putSharedPreferences();
-
-        openActivity(Home.class);
-        getActivity().finish();
-    }
-
-    private void putSharedPreferences(){
-        sharedPreferences = getActivity().getSharedPreferences("login",getActivity().MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-
-        editor.putString("usuario",Intercambio.getInstance().getUsuario().getCorreo());
-        editor.putString("pass",Intercambio.getInstance().getUsuario().getPassword());
-        editor.putString("token",Intercambio.getInstance().getUsuario().getLogin().getToken().toString());
-    }
-
-    private void checkSharedPreferences(){
-        sharedPreferences = getActivity().getSharedPreferences("login",getActivity().MODE_PRIVATE);
-
-        if(!sharedPreferences.getString("token","null").equalsIgnoreCase("null")){
-            checkToken(sharedPreferences.getString("usuario","null"),
-                    sharedPreferences.getString("pass","null"),
-
-                    UUID.fromString(sharedPreferences.getString("token","null")));
-
-            if(login){
-                getActivity().finish();
-                startActivity(new Intent(getActivity(), Home.class));
-            }
-        }
-    }
-
-    private void checkToken(String usuario, String pass, UUID token){
-        Call<Usuario> user = api.loginWithToken(token,usuario,pass);
-        user.enqueue(new Callback<Usuario>() {
+    public void loginUsuario(String username, String password){
+        LoginEntity login =  new LoginEntity(username, password);
+        Call<Usuario> call = api.login(login);
+        call.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                if(response.isSuccessful() && response.code()==200){
-                    login = true;
-                    Intercambio.getInstance().setUsuario(new Usuario());
-                }else{
-                    login = false;
+                if(!response.isSuccessful()){
+                    Toast.makeText(getActivity(),("Code: "+response.code()+" Usuario o Contraseña Invalidos"),Toast.LENGTH_LONG).show();
+                    vaciarCampos();
+                }else {
+                    Usuario usuario = response.body();
+                    Intercambio.getInstance().setUsuario(usuario);
+                    openActivity(Home.class);
+                    getActivity().finish();
                 }
             }
 
             @Override
             public void onFailure(Call<Usuario> call, Throwable t) {
-                login = false;
+                Toast.makeText(getActivity(),("ERROR: " + t.getMessage()),Toast.LENGTH_LONG).show();
             }
         });
-
     }
 }

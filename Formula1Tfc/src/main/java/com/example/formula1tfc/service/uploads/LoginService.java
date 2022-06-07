@@ -13,8 +13,8 @@ public class LoginService {
     LoginRepository loginRepository;
 
     public List<Login> findAllLogin() {return loginRepository.findAll();}
-    public Optional<Login> findLoginById(Long loginId) {
-        return loginRepository.findById(loginId);
+    public Optional<Login> findLoginById(String loginId) {
+        return loginRepository.findById(String.valueOf(loginId));
     }
     public Login saveLogin(Login login) {
         return loginRepository.save(login);
@@ -25,7 +25,6 @@ public class LoginService {
         login1.ifPresent(l -> {
 
             l.setId(loginNuevo.getId());
-            l.setActivo(loginNuevo.getActivo());
             l.setToken(loginNuevo.getToken());
             loginRepository.save(l);
 

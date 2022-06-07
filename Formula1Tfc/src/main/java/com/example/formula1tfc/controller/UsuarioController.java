@@ -3,10 +3,17 @@ package com.example.formula1tfc.controller;
 
 import com.example.formula1tfc.dto.CreateUserDTO;
 import com.example.formula1tfc.dto.UsuarioDTO;
+import com.example.formula1tfc.error.UsuarioNameNotFoundException;
 import com.example.formula1tfc.error.UsuarioNotFoundException;
 import com.example.formula1tfc.mapper.UsuarioMapper;
+import com.example.formula1tfc.models.Login;
+import com.example.formula1tfc.models.UserRole;
 import com.example.formula1tfc.models.Usuario;
+import com.example.formula1tfc.repository.LoginRepository;
 import com.example.formula1tfc.repository.UsuarioRepository;
+import com.example.formula1tfc.security.jwt.JwtProvider;
+import com.example.formula1tfc.security.jwt.model.JwtUserResponse;
+import com.example.formula1tfc.security.jwt.model.LoginRequest;
 import com.example.formula1tfc.service.uploads.UsuarioService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -19,10 +26,16 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuario")
@@ -31,7 +44,9 @@ public class UsuarioController {
     private final UsuarioRepository usuarioRepository;
     private final UsuarioService usuarioService;
     private final UsuarioMapper usuarioMapper;
-
+    private final AuthenticationManager authenticationManager;
+    private final JwtProvider tokenProvider;
+    private final LoginRepository loginRepository;
 
     @GetMapping(value = "/all2")
     public ResponseEntity<List<UsuarioDTO>> getAllUsuarios() {
@@ -71,37 +86,16 @@ public class UsuarioController {
             @ApiResponse(code = 404, message = "Not Found")
     })
     @GetMapping("/{id}")
-    public UsuarioDTO findById(@PathVariable Long id) {
+    public UsuarioDTO findById(@PathVariable String id) {
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new UsuarioNotFoundException(id));
         return usuarioMapper.toDTO(usuario);
 
-        //  Usuario usuario = usuarioRepository.findById(id).orElse(null);
-        //if (usuario == null) {
-        //   throw new NullPointerException(); //Excepcion personalizada
-        //} else {
-        //   return ResponseEntity.ok(usuarioMapper.toDTO(usuario));
-        //}
     }
-
-
-//  @ApiOperation(value = "Crear un usuario", notes = "Crea un usuario")
-//  @ApiResponses(value = {
-//          @ApiResponse(code = 200, message = "Created", response = UsuarioDTO.class),
-//          @ApiResponse(code = 400, message = "Bad Request") //Excepcion personalizada
-//  })
-//  @PostMapping("/usuario")
-//  public ResponseEntity<UsuarioDTO> save(@RequestBody UsuarioDTO usuarioDTO) {
-//      try {
-//          Usuario usuario = usuarioMapper.fromDTO(usuarioDTO);
-//          checkUsuarioData(usuario);
-//          Usuario usuarioInsertado = usuarioRepository.save(usuario);
-//          return ResponseEntity.ok(usuarioMapper.toDTO(usuarioInsertado));
-//      } catch (Exception e) {
-//          System.out.println(e.getMessage());
-//          throw new RuntimeException("Insertar, Error al insertar el usuario. Campos incorrectos " + e.getMessage());
-//      }
-//  }
-
+    @GetMapping("/name/{username}")
+    public UsuarioDTO obtenerUsuarioPorNombre(@PathVariable String username){
+        Usuario usuario = usuarioRepository.findByUsername(username).orElseThrow(() -> new UsuarioNameNotFoundException(username));
+        return usuarioMapper.toDTO(usuario);
+    }
     //Crear usuario seguro
     @ApiOperation(value = "Crear un usuario", notes = "Crea un usuario")
     @ApiResponses(value = {
@@ -114,7 +108,22 @@ public class UsuarioController {
         checkUsuarioData(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioMapper.toDTO(usuarioService.saveUsuario(nuevoUsuario)));
     }
-
+    @PostMapping("/login")
+    public JwtUserResponse login(@Valid @RequestBody LoginRequest loginRequest) {
+        Authentication authentication =
+                authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                loginRequest.getUsername(),
+                                loginRequest.getPassword()
+                        )
+                );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        Usuario user = (Usuario) authentication.getPrincipal();
+        String jwtToken = tokenProvider.generateToken(authentication);
+        Login login = new Login(jwtToken, user);
+        loginRepository.save(login);
+        return convertUserEntityAndTokenToJwtUserResponse(user, jwtToken);
+    }
 
     @ApiOperation(value = "Actualizar un usuario", notes = "Actualiza un usuario por id")
     @ApiResponses(value = {
@@ -123,7 +132,7 @@ public class UsuarioController {
             @ApiResponse(code = 400, message = "Bad Request")
     })
     @PutMapping("/update/{id}")
-    public UsuarioDTO update(@PathVariable Long id, @RequestBody Usuario usuario) {
+    public UsuarioDTO update(@PathVariable String id, @RequestBody Usuario usuario) {
 
         Usuario usuarioActualizado = usuarioRepository.findById(id).orElseThrow(() -> new UsuarioNotFoundException(id));
         checkUsuarioData(usuario);
@@ -143,7 +152,7 @@ public class UsuarioController {
             @ApiResponse(code = 400, message = "Bad Request")
     })
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<UsuarioDTO> delete(@PathVariable Long id) {
+    public ResponseEntity<UsuarioDTO> delete(@PathVariable String id) {
 
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new UsuarioNotFoundException(id));
         usuarioRepository.delete(usuario);
@@ -224,6 +233,18 @@ public class UsuarioController {
         } catch (Exception e) {
             throw new RuntimeException("Selección de Datos Parámetros de consulta incorrectos");
         }
+    }
+    private JwtUserResponse convertUserEntityAndTokenToJwtUserResponse(Usuario user, String jwtToken) {
+        return JwtUserResponse
+                .jwtUserResponseBuilder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .roles(user.getRoles().stream().map(UserRole::name).collect(Collectors.toSet()))
+                .correo(user.getCorreo())
+                .imagen(user.getImagen())
+                .password(user.getPassword())
+                .token(jwtToken)
+                .build();
     }
 
 }

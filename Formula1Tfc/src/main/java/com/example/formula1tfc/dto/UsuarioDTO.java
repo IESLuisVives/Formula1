@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class UsuarioDTO {
 
-    private long id;
+    private String id;
 
     @NotBlank(message = "Debes introducir un nombre")
     private String username;

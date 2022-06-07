@@ -1,11 +1,14 @@
 package com.example.formula1tfc.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
@@ -21,7 +24,7 @@ public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
     @Basic
     @Column(name = "correo")
@@ -39,19 +42,18 @@ public class Usuario implements UserDetails {
     @Column(name = "imagen")
     private String imagen;
 
-    @OneToOne
-    @JoinColumn(name = "login", referencedColumnName = "id")
-    private Login login;
+    @ToString.Exclude
+    private Set<Login> login;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<UserRole> roles;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -114,11 +116,13 @@ public class Usuario implements UserDetails {
         this.imagen = imagen;
     }
 
-    public Login getLogin() {
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario", cascade = CascadeType.REMOVE)
+    public Set<Login> getLogin() {
         return login;
     }
 
-    public void setLogin(Login login) {
+    public void setLogin(Set<Login> login) {
         this.login = login;
     }
 
@@ -130,7 +134,7 @@ public class Usuario implements UserDetails {
         this.roles = roles;
     }
 
-    public Usuario(long id, String correo, String username, String password, String imagen, Set<UserRole> roles) {
+    public Usuario(String id, String correo, String username, String password, String imagen, Set<UserRole> roles) {
         this.id = id;
         this.correo = correo;
         this.username = username;

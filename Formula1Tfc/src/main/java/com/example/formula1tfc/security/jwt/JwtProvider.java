@@ -33,7 +33,7 @@ public class JwtProvider {
         return Jwts.builder()
                 .signWith(Keys.hmacShaKeyFor(secreto.getBytes()), SignatureAlgorithm.HS512)
                 .setHeaderParam("typ", TOKEN_TYPE)
-                .setSubject(Long.toString(user.getId()))
+                .setSubject(user.getId())
                 .setIssuedAt(new Date())
                 .setExpiration(tokenExpirationDate)
                 .claim("username", user.getUsername())

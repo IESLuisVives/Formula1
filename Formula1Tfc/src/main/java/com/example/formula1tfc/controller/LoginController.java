@@ -71,7 +71,7 @@ public class LoginController {
     })
     @GetMapping("/logins/{id}")
     public ResponseEntity<LoginDTO> findById(@PathVariable Long id) {
-        Login login = loginRepository.findById(id).orElse(null);
+        Login login = loginRepository.findById(String.valueOf(id)).orElse(null);
         if (login == null) {
             throw new NullPointerException(); //Excepcion personalizada
         } else {
@@ -107,14 +107,13 @@ public class LoginController {
     @PutMapping("/logins/{id}")
     public ResponseEntity<LoginDTO> update(@PathVariable Long id, @RequestBody Login login) {
         try {
-            Login loginActualizado = loginRepository.findById(id).orElse(null);
+            Login loginActualizado = loginRepository.findById(String.valueOf(id)).orElse(null);
             if (loginActualizado == null) {
                 throw new NullPointerException();
             } else {
                 checkLoginData(login);
                 // Actualizamos los datos que queramos
                 loginActualizado.setId(login.getId());
-                loginActualizado.setActivo(login.getActivo());
                 loginActualizado.setToken(login.getToken());
 
                 loginActualizado = loginRepository.save(loginActualizado);
@@ -134,7 +133,7 @@ public class LoginController {
     @DeleteMapping("/logins/{id}")
     public ResponseEntity<LoginDTO> delete(@PathVariable Long id) {
         try {
-            Login login = loginRepository.findById(id).orElse(null);
+            Login login = loginRepository.findById(String.valueOf(id)).orElse(null);
             if (login == null) {
                 throw new NullPointerException();
             } else {

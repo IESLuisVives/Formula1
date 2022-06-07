@@ -82,7 +82,7 @@ public class Register extends Fragment {
                     if(binding.etPasswordRegister.getText().toString().equals(binding.etRepeatPasswordRegister.getText().toString())){
                         Usuario user = new Usuario();
                         user.setCorreo(binding.etEmailRegister.getText().toString());
-                        user.setNombre(binding.etUsernameRegister.getText().toString());
+                        user.setUsername(binding.etUsernameRegister.getText().toString());
                         user.setPassword(binding.etPasswordRegister.getText().toString());
 
                         Call<Usuario> call=api.crearUsuario(user);
