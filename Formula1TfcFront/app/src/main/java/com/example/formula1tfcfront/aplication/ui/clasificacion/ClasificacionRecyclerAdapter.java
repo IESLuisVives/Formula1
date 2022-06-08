@@ -38,11 +38,11 @@ public class ClasificacionRecyclerAdapter extends RecyclerView.Adapter<Clasifica
     public void onBindViewHolder(@NonNull @NotNull ClasificacionRecyclerAdapter.ViewHolder holder, int position) {
         ClasificacionPiloto elementoItem = pilotosList.get(position);
 
-        holder.textViewPosicion.setText(elementoItem.getPosicion());
+        holder.textViewPosicion.setText(String.valueOf(elementoItem.getPosicion()));
         holder.textViewNombre.setText(elementoItem.getNombrePiloto());
         holder.textViewEscuderia.setText(elementoItem.getEscuderia());
         holder.textViewBandera.setText(elementoItem.getBandera());
-        holder.textViewPuntos.setText(elementoItem.getPuntos());
+        holder.textViewPuntos.setText(String.valueOf(elementoItem.getPuntos()));
 
     }
 

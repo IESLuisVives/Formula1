@@ -1,15 +1,15 @@
 package com.example.formula1tfcfront.aplication.rest.model;
 
 public class ClasificacionEscuderia {
-    private String posicion;
+    private int posicion;
     private String nombreEscuderia;
-    private String puntos;
+    private int puntos;
 
-    public String getPosicion() {
+    public int getPosicion() {
         return posicion;
     }
 
-    public void setPosicion(String posicion) {
+    public void setPosicion(int posicion) {
         this.posicion = posicion;
     }
 
@@ -21,11 +21,11 @@ public class ClasificacionEscuderia {
         this.nombreEscuderia = nombreEscuderia;
     }
 
-    public String getPuntos() {
+    public int getPuntos() {
         return puntos;
     }
 
-    public void setPuntos(String puntos) {
+    public void setPuntos(int puntos) {
         this.puntos = puntos;
     }
 

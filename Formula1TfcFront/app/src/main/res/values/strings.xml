@@ -12,4 +12,5 @@
     <string name="menu_gallery">Pilotos</string>
     <string name="menu_slideshow">Circuitos</string>
     <string name="menu_clasificacion">Clasificación Pilotos</string>
+    <string name="menu_clasificacionEscuderias">Clasificación Escuderias</string>
 </resources>

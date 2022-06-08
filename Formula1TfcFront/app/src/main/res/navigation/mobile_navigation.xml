@@ -25,4 +25,7 @@
     <fragment android:id="@+id/clasificacionFragment"
               android:name="com.example.formula1tfcfront.aplication.ui.clasificacion.ClasificacionFragment"
               android:label="@string/menu_clasificacion" tools:layout="@layout/fragment_clasificacion"/>
+    <fragment android:id="@+id/clasificacionEscuderaFragment"
+              android:name="com.example.formula1tfcfront.aplication.ui.clasificacionEscuderia.ClasificacionEscuderaFragment"
+              android:label="@string/menu_clasificacionEscuderias" tools:layout="@layout/fragment_clasificacion_escudera"/>
 </navigation>

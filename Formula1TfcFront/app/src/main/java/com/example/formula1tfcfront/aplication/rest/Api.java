@@ -33,6 +33,9 @@ public interface Api {
     @GET("/clasificacion/all")
     Call<List<ClasificacionPiloto>> obtenerClasificacionPilotos();
 
+    @GET("/clasificacion/all/escuderias")
+    Call<List<ClasificacionEscuderia>> obtenerClasificacionEscuderia();
+
     @POST("/usuario/save")
     Call<Usuario> crearUsuario(@Body Usuario usuario);
 

@@ -20,6 +20,8 @@
             android:background="@drawable/redondear"
             android:inputType="textEmailAddress"
             android:ems="10"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:drawableTint="@color/red"
             android:id="@+id/et_email_login" app:layout_constraintTop_toBottomOf="@+id/tv_login"
             app:layout_constraintEnd_toEndOf="@+id/iv_login" app:layout_constraintStart_toStartOf="@+id/iv_login"
             android:layout_marginTop="35dp" android:hint="Usuario" android:minHeight="48dp"/>
@@ -28,6 +30,8 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:background="@drawable/redondear"
+            android:drawableLeft="@drawable/ic_baseline_key_24"
+            android:drawableTint="@color/red"
             android:textColorHint="@color/red"
             android:ems="10"
             android:id="@+id/et_password_login" app:layout_constraintTop_toBottomOf="@+id/et_email_login"

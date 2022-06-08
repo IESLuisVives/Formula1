@@ -44,8 +44,8 @@ public class UserFragment extends Fragment {
         binding = FragmentUserBinding.inflate(inflater,container,false);
 
         binding.buttonDarseDeBajaUprofile.setBackgroundColor(Color.RED);
-        binding.tvEmailUprofile.setText(Intercambio.getInstance().getUsuario().toString());
-        //binding.tvUsernameUprofile.setText(Intercambio.getInstance().getUsuario().getCorreo());
+        binding.tvEmailUprofile.setText(Intercambio.getInstance().getUsuario().getCorreo());
+        binding.tvUsernameUprofile.setText(Intercambio.getInstance().getUsuario().getUsername());
 
         setOnClick();
 

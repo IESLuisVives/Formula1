@@ -61,7 +61,7 @@ public class ClasificacionFragment extends Fragment {
                 Collections.sort(clasificacionPilotoList, new Comparator<ClasificacionPiloto>() {
                     @Override
                     public int compare(ClasificacionPiloto o1, ClasificacionPiloto o2) {
-                        return o1.getPosicion().compareTo(o2.getPosicion());
+                        return Integer.compare(o1.getPosicion(), o2.getPosicion());
                     }
                 });
 

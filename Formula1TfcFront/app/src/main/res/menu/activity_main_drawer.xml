@@ -20,5 +20,10 @@
                 android:id="@+id/clasificacionFragment"
                 android:icon="@drawable/icons8_trofeo_50"
                 android:title="@string/menu_clasificacion"/>
+        <item
+                android:id="@+id/clasificacionEscuderaFragment"
+                android:icon="@drawable/icons8_trofeo_50"
+                android:title="@string/menu_clasificacionEscuderias"/>
+
     </group>
 </menu>
