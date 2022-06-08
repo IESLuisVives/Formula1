@@ -142,4 +142,12 @@ public class Usuario implements UserDetails {
         this.imagen = imagen;
         this.roles = roles;
     }
+
+    public Usuario(String id, String correo, String username, String password, String imagen) {
+        this.id = id;
+        this.correo = correo;
+        this.username = username;
+        this.password = password;
+        this.imagen = imagen;
+    }
 }

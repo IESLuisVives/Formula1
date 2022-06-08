@@ -29,4 +29,13 @@ public class UsuarioDTO {
 
     private Set<String> roles;
 
+    public UsuarioDTO(String id, String username, String correo, String password, String imagen) {
+        this.id = id;
+        this.username = username;
+        this.correo = correo;
+        this.password = password;
+        this.imagen = imagen;
+    }
+
+
 }

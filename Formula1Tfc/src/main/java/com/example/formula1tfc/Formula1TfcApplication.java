@@ -1,10 +1,9 @@
 package com.example.formula1tfc;
 
-import com.example.formula1tfc.dto.CreateUserDTO;
+import com.example.formula1tfc.dto.UsuarioDTO;
 import com.example.formula1tfc.models.Circuito;
 import com.example.formula1tfc.models.Pilotos;
 import com.example.formula1tfc.models.TipoEscuderia;
-import com.example.formula1tfc.models.UserRole;
 import com.example.formula1tfc.repository.CircuitoRepository;
 import com.example.formula1tfc.repository.PilotosRepository;
 import com.example.formula1tfc.repository.UsuarioRepository;
@@ -15,8 +14,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.util.Collections;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 public class Formula1TfcApplication {
@@ -37,7 +34,7 @@ public class Formula1TfcApplication {
             pilotosRepository.deleteAll();
             circuitoRepository.deleteAll();
             repo.deleteAll();
-            usuarioRepository.saveUsuario(new CreateUserDTO("Saul@gmail.com","Saul","1234","imagen", Collections.singleton(UserRole.ADMIN)));
+            usuarioRepository.saveUsuario(new UsuarioDTO("1","Saul","Saul2@gmail.com","1234","imagen"));
             //Pilotos
             pilotosRepository.insert(new Pilotos(1,"Fernando Alonso", "40", "https://www.formula1.com/content/dam/fom-website/drivers/F/FERALO01_Fernando_Alonso/feralo01.png.transform/2col/image.png", TipoEscuderia.ALPINE.name()));
             pilotosRepository.insert(new Pilotos(2,"Steban Ocon", "25", "https://www.formula1.com/content/dam/fom-website/drivers/E/ESTOCO01_Esteban_Ocon/estoco01.png.transform/2col/image.png", TipoEscuderia.ALPINE.name()));

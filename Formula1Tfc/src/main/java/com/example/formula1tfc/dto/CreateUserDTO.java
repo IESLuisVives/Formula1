@@ -31,4 +31,11 @@ public class CreateUserDTO {
         this.roles = roles;
     }
 
+    public CreateUserDTO(String id, String correo, String username, String password, String imagen) {
+        this.id = id;
+        this.correo = correo;
+        this.username = username;
+        this.password = password;
+        this.imagen = imagen;
+    }
 }

@@ -3,6 +3,7 @@ package com.example.formula1tfc.controller;
 
 import com.example.formula1tfc.dto.CreateUserDTO;
 import com.example.formula1tfc.dto.UsuarioDTO;
+import com.example.formula1tfc.error.GeneralError;
 import com.example.formula1tfc.error.UsuarioNameNotFoundException;
 import com.example.formula1tfc.error.UsuarioNotFoundException;
 import com.example.formula1tfc.mapper.UsuarioMapper;
@@ -48,6 +49,7 @@ public class UsuarioController {
     private final JwtProvider tokenProvider;
     private final LoginRepository loginRepository;
 
+
     @GetMapping(value = "/all2")
     public ResponseEntity<List<UsuarioDTO>> getAllUsuarios() {
         return ResponseEntity.status(HttpStatus.OK).body(usuarioMapper.toDTO(usuarioRepository.findAll()));
@@ -86,9 +88,9 @@ public class UsuarioController {
             @ApiResponse(code = 404, message = "Not Found")
     })
     @GetMapping("/{id}")
-    public UsuarioDTO findById(@PathVariable String id) {
+    public ResponseEntity findById(@PathVariable String id) {
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new UsuarioNotFoundException(id));
-        return usuarioMapper.toDTO(usuario);
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioMapper.toDTO(usuario));
 
     }
     @GetMapping("/name/{username}")
@@ -103,8 +105,8 @@ public class UsuarioController {
             @ApiResponse(code = 400, message = "Bad Request") //Excepcion personalizada
     })
     @PostMapping("/save")
-    public ResponseEntity<UsuarioDTO> save(@RequestBody CreateUserDTO nuevoUsuario) throws Exception {
-        Usuario usuario = usuarioMapper.fromCreateDTOtoUsuario(nuevoUsuario);
+    public ResponseEntity<UsuarioDTO> save(@RequestBody UsuarioDTO nuevoUsuario) throws Exception {
+        Usuario usuario = usuarioMapper.fromDTO(nuevoUsuario);
         checkUsuarioData(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioMapper.toDTO(usuarioService.saveUsuario(nuevoUsuario)));
     }
@@ -132,7 +134,7 @@ public class UsuarioController {
             @ApiResponse(code = 400, message = "Bad Request")
     })
     @PutMapping("/update/{id}")
-    public UsuarioDTO update(@PathVariable String id, @RequestBody Usuario usuario) {
+    public ResponseEntity<UsuarioDTO> update(@RequestParam String id, @RequestBody Usuario usuario) {
 
         Usuario usuarioActualizado = usuarioRepository.findById(id).orElseThrow(() -> new UsuarioNotFoundException(id));
         checkUsuarioData(usuario);
@@ -141,7 +143,7 @@ public class UsuarioController {
         usuarioActualizado.setImagen(usuario.getImagen());
         usuarioActualizado = usuarioRepository.save(usuarioActualizado);
 
-        return usuarioMapper.toDTO(usuarioActualizado);
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioMapper.toDTO(usuarioActualizado));
     }
 
 
@@ -151,12 +153,15 @@ public class UsuarioController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 400, message = "Bad Request")
     })
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<UsuarioDTO> delete(@PathVariable String id) {
-
-        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new UsuarioNotFoundException(id));
-        usuarioRepository.delete(usuario);
-        return ResponseEntity.ok(usuarioMapper.toDTO(usuario));
+    @DeleteMapping("/delete")
+    public ResponseEntity delete(@RequestParam String id) {
+        usuarioRepository.deleteById(id);
+        Optional<Usuario> cliente = usuarioRepository.findById(id);
+        if (cliente.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new GeneralError());
+        }
     }
 
 
