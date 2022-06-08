@@ -3,8 +3,8 @@ package com.example.formula1tfcfront.aplication.rest.model;
 public class Circuito {
     private int id;
     private String pais;
-    private String nombreCircuito;
     private String vueltaRapida;
+    private String nombreCircuito;
     private String longitud;
     private String imagen;
 

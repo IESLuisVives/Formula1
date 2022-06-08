@@ -36,10 +36,10 @@ public class CircuitoRecyclerAdapter extends RecyclerView.Adapter<CircuitoRecycl
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Circuito elementoItem = circuitoList.get(position);
 
-        holder.textViewNombre.setText(holder.textViewNombre.getText()+" "+elementoItem.getNombreCircuito());
-        holder.textViewPais.setText(holder.textViewPais.getText()+" "+elementoItem.getPais());
+        holder.textViewNombre.setText(elementoItem.getNombreCircuito());
+        holder.textViewPais.setText(elementoItem.getPais());
         holder.textViewVueltaRapida.setText(elementoItem.getVueltaRapida());
-        holder.textViewLongitud.setText(holder.textViewLongitud.getText()+" "+elementoItem.getLongitud());
+        holder.textViewLongitud.setText(elementoItem.getLongitud());
         Glide.with(context).load(elementoItem.getImagen()).into(holder.imageViewCircuito);
     }
 

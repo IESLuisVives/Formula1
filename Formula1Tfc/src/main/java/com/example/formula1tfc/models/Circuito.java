@@ -11,6 +11,7 @@ import javax.persistence.Id;
 public class Circuito {
     private int id;
     private String pais;
+    private String nombreCircuito;
     private String vueltaRapida;
     private String longitud;
     private String imagen;
@@ -31,6 +32,15 @@ public class Circuito {
     public void setPais(String pais) {
         this.pais = pais;
     }
+
+    public String getNombreCircuito() {
+        return nombreCircuito;
+    }
+
+    public void setNombreCircuito(String nombreCircuito) {
+        this.nombreCircuito = nombreCircuito;
+    }
+
     @Basic
     public String getVueltaRapida() {
         return vueltaRapida;
@@ -53,6 +63,15 @@ public class Circuito {
     }
 
     public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public Circuito(int id, String pais, String nombreCircuito, String vueltaRapida, String longitud, String imagen) {
+        this.id = id;
+        this.pais = pais;
+        this.nombreCircuito = nombreCircuito;
+        this.vueltaRapida = vueltaRapida;
+        this.longitud = longitud;
         this.imagen = imagen;
     }
 }
