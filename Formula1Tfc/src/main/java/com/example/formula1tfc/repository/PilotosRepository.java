@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PilotosRepository extends MongoRepository<Pilotos, Integer> {
+
 }

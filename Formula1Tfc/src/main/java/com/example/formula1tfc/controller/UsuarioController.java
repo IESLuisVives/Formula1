@@ -134,16 +134,8 @@ public class UsuarioController {
             @ApiResponse(code = 400, message = "Bad Request")
     })
     @PutMapping("/update/{id}")
-    public ResponseEntity<UsuarioDTO> update(@RequestParam String id, @RequestBody Usuario usuario) {
-
-        Usuario usuarioActualizado = usuarioRepository.findById(id).orElseThrow(() -> new UsuarioNotFoundException(id));
-        checkUsuarioData(usuario);
-        usuarioActualizado.setId(usuario.getId());
-        usuarioActualizado.setUsername(usuario.getUsername());
-        usuarioActualizado.setImagen(usuario.getImagen());
-        usuarioActualizado = usuarioRepository.save(usuarioActualizado);
-
-        return ResponseEntity.status(HttpStatus.OK).body(usuarioMapper.toDTO(usuarioActualizado));
+    public ResponseEntity<UsuarioDTO> update( @RequestBody Usuario usuario) {
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioMapper.toDTO(usuarioRepository.save(usuario)));
     }
 
 
@@ -153,12 +145,12 @@ public class UsuarioController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 400, message = "Bad Request")
     })
-    @DeleteMapping("/delete")
-    public ResponseEntity delete(@RequestParam String id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity delete(@PathVariable String id) {
         usuarioRepository.deleteById(id);
         Optional<Usuario> cliente = usuarioRepository.findById(id);
         if (cliente.isEmpty()) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.OK).build();
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new GeneralError());
         }

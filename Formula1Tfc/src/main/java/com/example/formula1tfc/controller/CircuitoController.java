@@ -67,8 +67,8 @@ public class CircuitoController {
             @ApiResponse(code = 204, message = "No Content", response = CircuitoDTO.class),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralError.class)
     })
-    @DeleteMapping("/delete")
-    public ResponseEntity deleteCircuito(@RequestParam(name = "id", required = true) int id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteCircuito(@PathVariable int id) {
         repository.deleteById(id);
         Optional<Circuito> circuito = repository.findById(id);
         if (circuito.isEmpty()) {
