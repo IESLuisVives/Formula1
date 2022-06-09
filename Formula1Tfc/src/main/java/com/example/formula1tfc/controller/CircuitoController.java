@@ -6,7 +6,6 @@ import com.example.formula1tfc.error.GeneralError;
 import com.example.formula1tfc.mapper.CircuitoMapper;
 import com.example.formula1tfc.models.Circuito;
 import com.example.formula1tfc.repository.CircuitoRepository;
-import com.example.formula1tfc.service.uploads.StorageService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -14,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +22,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CircuitoController {
     private final CircuitoRepository repository;
-    private final StorageService storageService;
     private final CircuitoMapper mapper;
 
     @ApiOperation(value = "Get All Circuitos", notes = "Devuelve una lista de circuitos.")
@@ -52,14 +49,8 @@ public class CircuitoController {
     @ApiOperation(value = "Post Circuito", notes = "Devuelve el circuito que se ha insertado.")
     @ApiResponse(code = 201, message = "Created", response = CircuitoDTO.class)
     @PostMapping("/post")
-    public ResponseEntity<CircuitoDTO> postCircuito(@RequestBody CircuitoDTO circuitoDTO, @RequestPart("file") MultipartFile file) {
-        Circuito circuito = mapper.toModel(circuitoDTO);
-        if (!file.isEmpty()){
-            String imagen = storageService.store(file);
-            String urlImagen = storageService.getUrl(imagen);
-            circuito.setImagen(urlImagen);
-        }
-        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toDTO(repository.insert(circuito)));
+    public ResponseEntity<CircuitoDTO> postCircuito(@RequestBody CircuitoDTO circuitoDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toDTO(repository.insert(mapper.toModel(circuitoDTO))));
     }
 
     @ApiOperation(value = "Delete Circuito", notes = "Devolverá una respuesta sin cuerpo.")
