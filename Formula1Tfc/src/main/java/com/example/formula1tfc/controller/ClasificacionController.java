@@ -5,6 +5,8 @@ import com.example.formula1tfc.models.ClasificacionPiloto;
 import com.example.formula1tfc.repository.ClasificacionEscuderiaRepository;
 import com.example.formula1tfc.repository.ClasificacionRepository;
 import com.example.formula1tfc.service.uploads.ClasificacionService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +27,15 @@ public class ClasificacionController {
 
 
 
-
+    @ApiOperation(value = "Get All Clasificacion Piloto", notes = "Devuelve una lista de clasificacion de pilotos.")
+    @ApiResponse(code = 200, message = "OK", response = ClasificacionPiloto.class)
     @GetMapping("/all")
     public ResponseEntity<Set<ClasificacionPiloto>> getAllClasificacionPilotos() {
         return ResponseEntity.status(HttpStatus.OK).body(clasificacionService.extraerClasificacionPilotos());
     }
 
+    @ApiOperation(value = "Get All Clasificacion Escuderia", notes = "Devuelve una lista de clasificacion de escuderias.")
+    @ApiResponse(code = 200, message = "OK", response = ClasificacionEscuderia.class)
     @GetMapping("/all/escuderias")
     public ResponseEntity<Set<ClasificacionEscuderia>> getAllClasificacionEscuderias() {
         return ResponseEntity.status(HttpStatus.OK).body(clasificacionService.extraerClasificacionEscuderias());

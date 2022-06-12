@@ -21,7 +21,7 @@ public class Swagger {
                 .select()
                 .apis(
                         RequestHandlerSelectors
-                                .basePackage("application")
+                                .any()
                 )
                 .paths(PathSelectors.any())
                 .build()

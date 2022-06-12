@@ -9,17 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface Api {
-    @POST("/auth/login")
-    Call<Usuario> loginWithToken(@Query(value="username")String mail,
-                                 @Query(value="password")String password);
 
-
-
-    @GET("/usuario/name/{username}")
-    Call<Usuario> usuarioPorNombre(@Path("username") String username);
-
-    @GET("/circuito/all")
-    Call<List<Circuito>> obtenerTodosCircuitos();
 
     @GET("/noticia/all")
     Call<List<Noticia>> obtenerNoticias();
