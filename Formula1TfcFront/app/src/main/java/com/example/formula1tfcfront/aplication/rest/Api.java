@@ -32,9 +32,4 @@ public interface Api {
     @POST("/usuario/login")
     Call<Usuario> login(@Body LoginEntity login);
 
-
-
-
-
-
 }
